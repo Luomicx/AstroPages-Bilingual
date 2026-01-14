@@ -168,57 +168,59 @@ const nextPost =
   <Footer lang={lang} />
 </Layout>
 
-<script is:inline data-astro-rerun>
-  /** Create a progress indicator
-   *  at the top */
-  function createProgressBar() {
-    const progressId = "myBar";
-    const containerId = "progress-container";
+<script>
+  function initProgressBar() {
+    const progressId = "reading-progress-bar";
+    const containerId = "reading-progress-container";
+    
+    // Check if we are on a post page (presence of #article)
+    const article = document.querySelector("#article");
+    if (!article) {
+      // If NOT on a post page, ensure cleanup if it exists (though ViewTransitions usually rebuilds body, safe to check)
+      const existingContainer = document.getElementById(containerId);
+      if (existingContainer) existingContainer.remove();
+      return;
+    }
 
-    if (document.getElementById(containerId)) return;
+    // Only create if it doesn't exist
+    if (!document.getElementById(containerId)) {
+      const progressContainer = document.createElement("div");
+      progressContainer.id = containerId;
+      progressContainer.className =
+        "progress-container fixed top-0 left-0 z-50 h-1 w-full bg-transparent pointer-events-none";
 
-    const progressContainer = document.createElement("div");
-    progressContainer.id = containerId;
-    progressContainer.className =
-      "progress-container fixed top-0 z-50 h-1 w-full bg-background pointer-events-none";
+      const progressBar = document.createElement("div");
+      progressBar.className = "progress-bar h-full w-0 bg-accent transition-all duration-150 ease-out";
+      progressBar.id = progressId;
 
-    const progressBar = document.createElement("div");
-    progressBar.className = "progress-bar h-1 w-0 bg-accent";
-    progressBar.id = progressId;
+      progressContainer.appendChild(progressBar);
+      document.body.appendChild(progressContainer);
+    }
+    
+    const updateScroll = () => {
+      const myBar = document.getElementById(progressId);
+      if (!myBar) return;
 
-    progressContainer.appendChild(progressBar);
-    document.body.appendChild(progressContainer);
-  }
-
-  function updateScrollProgress() {
-    const progressId = "myBar";
-    const update = () => {
-      const winScroll =
-        document.body.scrollTop || document.documentElement.scrollTop;
-      const height =
-        document.documentElement.scrollHeight -
-        document.documentElement.clientHeight;
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
       const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
       
-      const myBar = document.getElementById(progressId);
-      if (myBar) {
-        myBar.style.width = scrolled + "%";
-      }
+      myBar.style.width = scrolled + "%";
     };
 
-    // Initial update
-    update();
+    // Initial check
+    updateScroll();
 
-    document.addEventListener("scroll", update);
-
-    // Cleanup listener on page swap
+    // Attach listener
+    document.addEventListener("scroll", updateScroll);
+    
+    // Cleanup on next navigation
     document.addEventListener("astro:before-swap", () => {
-       document.removeEventListener("scroll", update);
+       document.removeEventListener("scroll", updateScroll);
+       const container = document.getElementById(containerId);
+       if (container) container.remove();
     }, { once: true });
   }
-
-  createProgressBar();
-  updateScrollProgress();
 
   /** Attaches links to headings in the document,
    *  allowing sharing of sections easily */
@@ -240,7 +242,6 @@ const nextPost =
       heading.appendChild(link);
     }
   }
-  addHeadingLinks();
 
   /** Attaches copy buttons to code blocks in the document,
    * allowing users to copy code easily. */
@@ -291,7 +292,13 @@ const nextPost =
       }, 700);
     }
   }
-  attachCopyButtons();
+
+  /* Run everything on page load */
+  document.addEventListener("astro:page-load", () => {
+    initProgressBar();
+    addHeadingLinks();
+    attachCopyButtons();
+  });
 
   /* Go to page start after page swap */
   document.addEventListener("astro:after-swap", () =>
