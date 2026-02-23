@@ -54,11 +54,7 @@ const structuredData = {
 ---
 
 <!doctype html>
-<html
-  dir={SITE.dir}
-  lang={lang}
-  class={`${scrollSmooth && "scroll-smooth"}`}
->
+<html dir={SITE.dir} lang={lang} class={`${scrollSmooth && "scroll-smooth"}`}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -126,6 +122,11 @@ const structuredData = {
       href={new URL(`${lang}/rss.xml`, Astro.site)}
     />
 
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"
+    />
+
     <meta name="theme-color" content="" />
 
     {
@@ -144,25 +145,26 @@ const structuredData = {
 
     <!-- Language Preference Redirect -->
     <script is:inline>
-      (function() {
+      (function () {
         const preferredLang = localStorage.getItem("preferredLang");
         const path = window.location.pathname;
 
         // Function to handle redirection (Global)
         function checkAndRedirect(targetLang) {
-            const currentPath = window.location.pathname;
-            const isEnglishPath = currentPath.startsWith("/en/") || currentPath === "/en";
+          const currentPath = window.location.pathname;
+          const isEnglishPath =
+            currentPath.startsWith("/en/") || currentPath === "/en";
 
-            if (targetLang === "en" && !isEnglishPath) {
-                // Redirect to English
-                // Ensure we don't double slash if path is just "/"
-                const pathSuffix = currentPath === "/" ? "/" : currentPath;
-                window.location.replace("/en" + pathSuffix.replace(/^\//, "/")); 
-            } else if (targetLang === "zh" && isEnglishPath) {
-                // Redirect to Chinese
-                const newPath = currentPath.replace(/^\/en/, "") || "/";
-                window.location.replace(newPath);
-            }
+          if (targetLang === "en" && !isEnglishPath) {
+            // Redirect to English
+            // Ensure we don't double slash if path is just "/"
+            const pathSuffix = currentPath === "/" ? "/" : currentPath;
+            window.location.replace("/en" + pathSuffix.replace(/^\//, "/"));
+          } else if (targetLang === "zh" && isEnglishPath) {
+            // Redirect to Chinese
+            const newPath = currentPath.replace(/^\/en/, "") || "/";
+            window.location.replace(newPath);
+          }
         }
 
         if (preferredLang) {

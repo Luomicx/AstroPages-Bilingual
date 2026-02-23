@@ -1,9 +1,9 @@
 export const SITE = {
-  website: "https://astropages-bilingual.pages.dev", // replace this with your deployed domain
-  author: "tosaki",
-  profile: "https://t0saki.com",
+  website: "https://blog.821886.xyz", // replace this with your deployed domain
+  author: "Slias",
+  profile: "https://821886.xyz",
   desc: "A bilingual blog based on Astro Paper",
-  title: "AstroPaper Bilingual",
+  title: "Slias Astro Blog",
   ogImage: "astropaper-og.jpg",
   lightAndDarkMode: true,
   postPerIndex: 4,
