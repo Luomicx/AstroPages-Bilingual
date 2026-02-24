@@ -2,10 +2,10 @@
 title: CloudFlare与Versel配置冲突问题
 pubDatetime: 2025-03-30T13:45:40Z
 description: CloudFlare与Versel配置冲突问题解决方案
-featured: false
+featured: true
 draft: false
 tags:
-  - 算法
+  - 技术博客
 ---
 
 # 一、CloudFlare：网络安全和性能优化的托管平台

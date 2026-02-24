@@ -2,7 +2,7 @@
 title: Java学习 - MySQL 深度学习
 pubDatetime: 2025-08-05T22:20:40Z
 description: MySQL 深度学习笔记
-featured: false
+featured: true
 draft: false
 tags:
   - Java
@@ -950,7 +950,6 @@ create index  idx_pro_age_sta on tb_user(profession, age, status) -- 联合索�
 - **SQL 执行效率：** 通过 `SHOW [session|global] STATUS LIKE 'Com_______'` 来查询四个语句的执行次数
 
 - **慢查询日志：** 记录了执行时间超过指定时间的所有 SQL 语句的日志
-
   - MySQL 慢查询日志默认未开启，可以通过配置文件开启
 
   - ```ini
@@ -963,7 +962,6 @@ create index  idx_pro_age_sta on tb_user(profession, age, status) -- 联合索�
   - 查看 `var/lib/mysql/localhost-slow.log` 文件查询慢日志信息
 
 - **profile 详情：** `show profiles` 可以帮助我们了解时间都耗费在哪里。通过 `select @@have_profiling` 查询是否开启
-
   - `show profile for query query_id` 可以看到一个详细的查询的耗费详情
 
 - **explain 执行计划：** 通过 explain 执行计划获取 MySQL 是如何执行语句的，也就是语句的执行计划，只要在查询语句前加一个 **explain**, 例如：`explain select * from tb_user;`
@@ -2171,7 +2169,6 @@ select object_schema,object_name,index_name,lock_type,lock_mode,lock_data from p
   这时事务 A 就为我们 id = 1 的记录加上了 X 型的记录锁，所以在事务 B 或者事务 C 进行修改和删除操作的时候会被堵塞。
 
   分析一下事务 A 上了什么锁：
-
   - 行锁：X 类型的记录锁
   - 表锁：X 类型的意向锁
 

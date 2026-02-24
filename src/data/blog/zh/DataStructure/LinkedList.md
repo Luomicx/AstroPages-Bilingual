@@ -2,11 +2,12 @@
 title: 数据结构 - [LinkedList]
 pubDatetime: 2025-09-26T20:20:40Z
 description: 数据结构 - 链表笔记
-featured: false
+featured: true
 draft: false
 tags:
   - 数据结构
 ---
+
 # 链表的数据结构
 
 ### 简介
@@ -161,7 +162,7 @@ public class LinkedListTest<E> implements List<E> {
             System.out.println();
         }
     }
-    
+
     Node<E> node(int index) {
         // 这里是 size >> 1 是右移一位，也就是除以二，看距离头节点近还是尾节点近
        if (index < (size >> 1)) {
@@ -231,4 +232,3 @@ public interface List<E> {
 }
 
 ```
-
