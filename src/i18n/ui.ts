@@ -20,7 +20,7 @@ export const ui = {
     "nav.goBack": "返回",
     "nav.searchDesc": "搜索文章...",
     "nav.archivesDesc": "所有归档文章",
-    
+
     // Months
     "month.1": "一月",
     "month.2": "二月",
@@ -34,18 +34,19 @@ export const ui = {
     "month.10": "十月",
     "month.11": "十一月",
     "month.12": "十二月",
-    
+
     // Home page hero
-    "hero.greeting": "你好",
-    "hero.description": "这是一个简洁、响应式、无障碍且对 SEO 友好的 Astro 博客主题。支持明暗模式切换，可自定义配色方案。",
-    "hero.cta": "阅读博客文章或查看",
+    "hero.greeting": "Silas 的博客",
+    "hero.description":
+      "这是一个个人博客网站，记录学习记录、技术开发和个人随笔，欢迎来到我的博客。",
+    "hero.cta": "祝你天天开心！",
     "hero.socialLinks": "社交链接：",
-    
+
     // Sections
     "section.featured": "精选文章",
     "section.recentPosts": "最新文章",
     "button.allPosts": "所有文章",
-    
+
     // Post details
     "post.previous": "上一篇",
     "post.next": "下一篇",
@@ -53,7 +54,7 @@ export const ui = {
     "post.backToTop": "返回顶部",
     "post.updated": "更新于：",
     "post.editPage": "编辑页面",
-    
+
     // Pages
     "page.posts": "文章",
     "page.postsDesc": "所有发布的文章",
@@ -63,18 +64,18 @@ export const ui = {
     "page.tagDesc": "包含「{tag}」标签的所有文章",
     "page.about": "关于",
     "page.pageNum": "第 {num} 页",
-    
+
     // Footer
     "footer.copyright": "版权所有 © {year}",
     "footer.allRights": "保留所有权利",
-    
+
     // 404 Page
     "error.pageNotFound": "页面未找到",
     "error.goHome": "返回首页",
-    
+
     // Theme
     "theme.toggle": "切换明暗模式",
-    
+
     // Language
     "lang.switch": "切换语言",
   },
@@ -104,18 +105,19 @@ export const ui = {
     "month.10": "October",
     "month.11": "November",
     "month.12": "December",
-    
+
     // Home page hero
     "hero.greeting": "Hello",
-    "hero.description": "A minimal, responsive, accessible and SEO-friendly Astro blog theme. Light and dark mode supported with customizable color schemes.",
+    "hero.description":
+      "A minimal, responsive, accessible and SEO-friendly Astro blog theme. Light and dark mode supported with customizable color schemes.",
     "hero.cta": "Read the blog posts or check",
     "hero.socialLinks": "Social Links:",
-    
+
     // Sections
     "section.featured": "Featured",
     "section.recentPosts": "Recent Posts",
     "button.allPosts": "All Posts",
-    
+
     // Post details
     "post.previous": "Previous Post",
     "post.next": "Next Post",
@@ -123,34 +125,34 @@ export const ui = {
     "post.backToTop": "Back To Top",
     "post.updated": "Updated:",
     "post.editPage": "Edit page",
-    
+
     // Pages
     "page.posts": "Posts",
     "page.postsDesc": "All the articles I've posted.",
     "page.tags": "Tags",
     "page.tagsDesc": "All the tags used in posts.",
     "page.tagPrefix": "Tag:",
-    "page.tagDesc": "All the articles with the tag \"{tag}\".",
+    "page.tagDesc": 'All the articles with the tag "{tag}".',
     "page.about": "About",
     "page.pageNum": "page {num}",
-    
+
     // Footer
     "footer.copyright": "Copyright © {year}",
     "footer.allRights": "All rights reserved.",
-    
+
     // 404 Page
     "error.pageNotFound": "Page Not Found",
     "error.goHome": "Go back home",
-    
+
     // Theme
     "theme.toggle": "Toggles light & dark",
-    
+
     // Language
     "lang.switch": "Switch language",
   },
 } as const;
 
-export type TranslationKey = keyof typeof ui[typeof defaultLang];
+export type TranslationKey = keyof (typeof ui)[typeof defaultLang];
 
 export function useTranslations(lang: Lang) {
   return function t(key: TranslationKey): string {
@@ -176,22 +178,32 @@ export function getLangPrefix(lang: Lang): string {
  * Get the alternate language path for the current URL
  * Handles switching between root (Chinese) and /en/ (English) paths
  */
-export function getAlternatePath(currentPath: string, targetLang: Lang): string {
+export function getAlternatePath(
+  currentPath: string,
+  targetLang: Lang
+): string {
   const pathParts = currentPath.split("/").filter(p => p);
-  
+
   // Remove current language prefix if present ("en" or legacy "zh")
   if (pathParts[0] === "en" || pathParts[0] === "zh") {
     pathParts.shift();
   }
-  
+
   // Add target language prefix only if not default (Chinese)
   if (targetLang !== defaultLang) {
     pathParts.unshift(targetLang);
   }
-  
+
   // Build the path - handle empty pathParts case (root)
   const pathString = pathParts.length > 0 ? pathParts.join("/") : "";
-  const trailingSlash = currentPath.endsWith("/") || currentPath === "" || pathParts.length === 0 ? "/" : "";
-  
-  return "/" + pathString + (pathString && trailingSlash ? "/" : trailingSlash ? "" : "");
+  const trailingSlash =
+    currentPath.endsWith("/") || currentPath === "" || pathParts.length === 0
+      ? "/"
+      : "";
+
+  return (
+    "/" +
+    pathString +
+    (pathString && trailingSlash ? "/" : trailingSlash ? "" : "")
+  );
 }
