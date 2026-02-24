@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cd:*)",
+      "Bash(tree:*)",
+      "Bash(nul)",
+      "Bash(git checkout:*)",
+      "Bash(dir:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nfeat: add @altano/astro-table-of-contents sidebar\n\n- Extract headings from render(post) in PostDetails.astro\n- Filter remark-toc generated heading from sidebar TOC\n- Add fixed TOC sidebar visible at xl+ breakpoints (1280px+)\n- Style TOC links to match site accent/foreground color tokens\nEOF\n)\")"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
