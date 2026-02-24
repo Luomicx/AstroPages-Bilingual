@@ -70,3 +70,47 @@ html[data-theme="dark"] {
 :target {
   scroll-margin-block: 1rem;
 }
+
+/* ===== Table of Contents Sidebar ===== */
+#toc-sidebar {
+  position: fixed;
+  top: 5rem;
+  left: calc(50% + 24rem + 1.5rem);
+  width: 13rem;
+  max-height: calc(100vh - 7rem);
+  overflow-y: auto;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  z-index: 10;
+}
+
+.toc-title {
+  margin-bottom: 0.5rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--foreground) 50%, transparent);
+}
+
+#toc-sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#toc-sidebar ul ul {
+  padding-left: 0.75rem;
+}
+
+#toc-sidebar a {
+  display: block;
+  padding: 0.125rem 0;
+  color: color-mix(in srgb, var(--foreground) 60%, transparent);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+#toc-sidebar a:hover {
+  color: var(--accent);
+}
