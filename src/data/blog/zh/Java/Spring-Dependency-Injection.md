@@ -1,6 +1,6 @@
 ---
 title: Java学习 - Spring 依赖注入
-pubDatetime: 2026-02-27T21:20:40Z
+pubDatetime: 2026-02-27T13:20:40Z
 description: JavaWeb 学习笔记
 featured: true
 draft: false
