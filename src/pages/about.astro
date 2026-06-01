@@ -11,20 +11,24 @@ const lang: Lang = "zh";
 
 // Chinese content
 const c = {
-  title: "关于",
-  intro: "这是一个基于 AstroPaper 主题构建的双语博客系统。",
-  description: "AstroPaper 是一个简洁、无障碍且对 SEO 友好的博客主题，基于 Astro 和 TailwindCSS 构建。",
-  features: "功能特点",
-  featureList: [
-    "🌍 **双语支持** - 完整的中英文内容支持",
-    "🚀 **高性能** - 基于 Astro 5 的静态站点生成",
-    "🌙 **明暗模式** - 支持明暗主题切换",
-    "📱 **响应式设计** - 完美适配各种设备",
-    "🔍 **SEO 友好** - 内置 SEO 优化",
-    "♿ **无障碍** - 遵循 WCAG 标准",
+  title: "关于我",
+  intro:
+    "你好，我是 Slias。这里是我的个人博客，也是我整理学习轨迹、技术笔记和问题复盘的地方。",
+  description:
+    "我会把日常学习中真正写过、踩过、理解过的内容沉淀下来：从 Java、MySQL、JavaWeb、Spring 依赖注入，到数据结构、算法训练、网络互联，以及 Cloudflare 与 Vercel 这类部署配置问题。比起追求文章数量，我更希望每一篇都能在以后回看时帮我快速找回当时的思路。",
+  writing: "我在记录什么",
+  writingList: [
+    "**Java 与后端基础**：记录 Java 语法、异常处理、Java 8 新特性、JavaWeb、MySQL 和 Spring 相关学习笔记。",
+    "**数据结构与算法**：整理数组、链表、二分、归并排序、动态规划、BFS、DFS、回溯、蓝桥杯和 ACWing 题单中的解题方法。",
+    "**网络与工程实践**：复习 ACL、NAT 等网络互联知识，也记录网站部署、代理配置和实际排错过程。",
+    "**学习复盘**：把视频、课程、刷题和项目中零散的知识重新组织成能被自己再次理解的笔记。",
   ],
-  support: "支持项目",
-  supportText: "如果你喜欢这个项目，欢迎给它一个 ⭐️",
+  attitude: "写博客的方式",
+  attitudeText:
+    "这个博客不是简历，也不是教程合集，更像是一份持续更新的工程学习日志。文章里可能会有代码模板、配置命令、概念梳理，也会有一些当时还不够成熟的理解。我希望它能保持真实、可追踪、可修正：现在能帮我复习，以后也能见证我如何把知识学扎实。",
+  contact: "联系",
+  contactText:
+    "如果你也在学习 Java、算法、网络或 Web 开发，欢迎通过 GitHub 看到更多项目与记录。",
 };
 ---
 
@@ -34,23 +38,35 @@ const c = {
   <main id="main-content" class="app-layout">
     <section id="about" class="app-prose mb-28 max-w-app prose-img:border-0">
       <h1 class="text-2xl tracking-wider sm:text-3xl">{c.title}</h1>
-      
+
       <p>{c.intro}</p>
       <p>{c.description}</p>
-      
-      <h2>{c.features}</h2>
+
+      <h2>{c.writing}</h2>
       <ul>
-        {c.featureList.map(feature => (
-          <li set:html={feature.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')} />
-        ))}
+        {
+          c.writingList.map(item => (
+            <li
+              set:html={item.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")}
+            />
+          ))
+        }
       </ul>
-      
-      <h2>{c.support}</h2>
+
+      <h2>{c.attitude}</h2>
+      <p>{c.attitudeText}</p>
+
+      <h2>{c.contact}</h2>
       <p>
-        {c.supportText}
-        <a href="https://github.com/t0saki/AstroPages-Bilingual" target="_blank" rel="noopener noreferrer">
+        {c.contactText}
+        <a
+          href="https://github.com/Luomicx"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           GitHub
         </a>
+        。
       </p>
     </section>
   </main>
